@@ -55,6 +55,7 @@ bot.on('message', function (user, userID, channelID, message, evt) {
                         });
 
                         games[0].push(userID);
+												games[0].push(user);
 
                     } else {
                         bot.sendMessage({
@@ -115,14 +116,14 @@ bot.on('message', function (user, userID, channelID, message, evt) {
 
                     bot.sendMessage({
                         to: channelID,
-                        message: 'Looking to play the raid (' + games[0].length + '/6):'
+                        message: 'Looking to play the raid (' + (games[0].length)/2 + '/6):'
                     });
 
-                    for(i = 0; i < games[0].length; i++) {
+                    for(i = 1; i < games[0].length; i+=2) {
                         playerNum = i + 1;
                         bot.sendMessage({
                             to: channelID,
-                            message: playerNum + ') ' + '<' + games[0][i] + '>'
+                            message: playerNum + ') ' + '' + games[0][i]
                         });
                     }
 
@@ -153,7 +154,7 @@ bot.on('message', function (user, userID, channelID, message, evt) {
                 } else {
                     bot.sendMessage({
                         to: channelID,
-                        message: user + 'Command not recognized'
+                        message: user + ' Command not recognized'
                     });
                 }
 
@@ -171,10 +172,10 @@ function remove(array, element) {
 }
 
 setInterval(function() {
-    if (games[0].length == 2){
+    if (games[0].length == 4){
     bot.sendMessage({
         to: lfgChannel,
-        message: 'The raid is full! ' + '<@' + games[0][0] + '>' + ', ' + '<@' + games[0][1] + '>' + ' please assemble in orbit!'
+        message: 'The raid is full! ' + '<@' + games[0][0] + '>' + ', ' + '<@' + games[0][2] + '>' + ' please assemble in orbit!'
     });
 
     games[0].splice(0, 1);
