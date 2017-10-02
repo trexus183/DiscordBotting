@@ -1,0 +1,11 @@
+{
+  "name": "Roni 55-30",
+  "version": "0.0.1",
+  "description": "The vanguard quartermaster Roni 55-30 has been repurposed to organize guardian teams for various operations, under the watch of Cayde-6.",
+  "main": "bot.js",
+  "author": "Trexus183",
+  "dependencies": {
+    "discord.io": "^2.5.3",
+    "winston": "^2.3.1"
+  }
+}
