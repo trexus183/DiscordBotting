@@ -90,7 +90,7 @@ bot.on('message', function (user, userID, channelID, message, evt) {
                 } else {
                     bot.sendMessage({
                         to: channelID,
-                        message: user + 'Command not recognized'
+                        message: user + ', command not recognized. Format is: ?LFG [activity]'
                     });
                 }
             break;
@@ -119,8 +119,12 @@ bot.on('message', function (user, userID, channelID, message, evt) {
                         message: 'Looking to play the raid (' + (games[0].length)/2 + '/6):'
                     });
 
+										for (j = 0; j < 10; j++){
+											console.log("Waiting...");
+										}
+
                     for(i = 1; i < games[0].length; i+=2) {
-                        playerNum = i + 1;
+                        playerNum = i;
                         bot.sendMessage({
                             to: channelID,
                             message: playerNum + ') ' + '' + games[0][i]
@@ -154,7 +158,7 @@ bot.on('message', function (user, userID, channelID, message, evt) {
                 } else {
                     bot.sendMessage({
                         to: channelID,
-                        message: user + ' Command not recognized'
+                        message: user + ', command not recognized. Format is: ?status [activity]'
                     });
                 }
 
