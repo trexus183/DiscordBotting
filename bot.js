@@ -12,6 +12,7 @@ var games = new Array(
 );
 var lfgChannel;
 var playerNum;
+var clearCnt;
 // Configure logger settings
 logger.remove(logger.transports.Console);
 logger.add(logger.transports.Console, {
@@ -113,14 +114,12 @@ bot.on('message', function (user, userID, channelID, message, evt) {
 
             case 'status':
                 if (args[0] === "raid") { //0
-
                     bot.sendMessage({
                         to: channelID,
                         message: 'Looking to play the raid (' + (games[0].length)/2 + '/6):'
                     });
 
-										for (j = 0; j < 10; j++){
-											console.log("Waiting...");
+										for (j = 0; j < 25; j++){
 										}
 
                     for(i = 1; i < games[0].length; i+=2) {
@@ -177,14 +176,14 @@ function remove(array, element) {
 
 setInterval(function() {
     if (games[0].length == 4){
-    bot.sendMessage({
-        to: lfgChannel,
-        message: 'The raid is full! ' + '<@' + games[0][0] + '>' + ', ' + '<@' + games[0][2] + '>' + ' please assemble in orbit!'
-    });
-
-    games[0].splice(0, 1);
-    games[0].splice(0, 1);
-
+    	bot.sendMessage({
+        	to: lfgChannel,
+        	message: 'The raid is full! ' + '<@' + games[0][0] + '>' + ', ' + '<@' + games[0][2] + '>' + ' please assemble in orbit!'
+    	});
+			clearCnt = games[0].length
+			for (i = 0; i < clearCnt; i++){
+    		games[0].splice(0, 1);
+			}
     }
 
 }, 1000);
