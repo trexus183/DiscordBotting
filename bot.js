@@ -47,7 +47,15 @@ bot.on('message', function (user, userID, channelID, message, evt) {
 
         args = args.splice(1);
         switch(cmd) {
-            case 'LFG':
+						case 'remove':
+							for (i = 0; i < games.length; i++) {
+								clearCnt = games[i];
+								for (j = 0; j < clearCnt; j++) {
+									games[i].splice(0, 1);
+								}
+							}
+						break;
+						case 'LFG':
                 if (args[0] === "raid") {
                     if (games[0].indexOf(userID) == -1){
                         bot.sendMessage({
@@ -64,30 +72,71 @@ bot.on('message', function (user, userID, channelID, message, evt) {
                             message: '<@' + userID + '>' + " Error: You've already joined this team"
                         });
                     }
-                } else if (args[0] === "trials") {
-                    bot.sendMessage({
-                        to: channelID,
-                        message: user + ' is looking for ' + args[1] + ' more to do trials'
-                    });
 
+								} else if (args[0] === "trials") {
+									if (games[1].indexOf(userID) == -1){
+											bot.sendMessage({
+													to: channelID,
+													message: user + ' is looking to play trials of the nine'
+											});
+
+											games[1].push(userID);
+											games[1].push(user);
+
+									} else {
+										bot.sendMessage({
+											to: channelID,
+											message: '<@' + userID + '>' + " Error: You've already joined this team"
+										});
+									}
                 } else if (args[0] === "crucible") {
-                    bot.sendMessage({
-                        to: channelID,
-                        message: user + ' is looking for ' + args[1] + ' more to play crucible'
-                    });
+									if (games[2].indexOf(userID) == -1){
+											bot.sendMessage({
+													to: channelID,
+													message: user + ' is looking to play crucible'
+											});
 
+											games[2].push(userID);
+											games[2].push(user);
+
+									} else {
+										bot.sendMessage({
+												to: channelID,
+												message: '<@' + userID + '>' + " Error: You've already joined this team"
+										});
+									}
                 } else if (args[0] === "strike") {
-                    bot.sendMessage({
-                        to: channelID,
-                        message: user + ' is looking for ' + args[1] + ' more to do strikes'
-                    });
+									if (games[3].indexOf(userID) == -1){
+											bot.sendMessage({
+													to: channelID,
+													message: user + ' is looking to do strikes'
+											});
 
+											games[3].push(userID);
+											games[3].push(user);
+
+									} else {
+										bot.sendMessage({
+												to: channelID,
+												message: '<@' + userID + '>' + " Error: You've already joined this team"
+										});
+									}
                 } else if (args[0] === "patrol") {
-                    bot.sendMessage({
-                        to: channelID,
-                        message: user + ' is looking for ' + args[1] + ' more to patrol'
-                    });
+									if (games[4].indexOf(userID) == -1){
+											bot.sendMessage({
+													to: channelID,
+													message: user + ' is looking to patrol around'
+											});
 
+											games[4].push(userID);
+											games[4].push(user);
+
+									} else {
+										bot.sendMessage({
+												to: channelID,
+												message: '<@' + userID + '>' + " Error: You've already joined this team"
+										});
+									}
                 } else {
                     bot.sendMessage({
                         to: channelID,
@@ -131,28 +180,72 @@ bot.on('message', function (user, userID, channelID, message, evt) {
                     }
 
                 } else if (args[0] === "trials") { //1
-                    bot.sendMessage({
-                        to: channelID,
-                        message: user + ' is looking for ' + args[1] + ' more to do trials'
-                    });
+									bot.sendMessage({
+											to: channelID,
+											message: 'Looking to do trials of the nine (' + (games[1].length)/2 + '/4):'
+									});
+
+									for (j = 0; j < 25; j++){
+									}
+
+									for(i = 1; i < games[1].length; i+=2) {
+											playerNum = i;
+											bot.sendMessage({
+													to: channelID,
+													message: playerNum + ') ' + '' + games[1][i]
+											});
+									}
 
                 } else if (args[0] === "crucible") { //2
-                    bot.sendMessage({
-                        to: channelID,
-                        message: user + ' is looking for ' + args[1] + ' more to play crucible'
-                    });
+									bot.sendMessage({
+											to: channelID,
+											message: 'Looking to play crucible (' + (games[2].length)/2 + '/4):'
+									});
+
+									for (j = 0; j < 25; j++){
+									}
+
+									for(i = 1; i < games[2].length; i+=2) {
+											playerNum = i;
+											bot.sendMessage({
+													to: channelID,
+													message: playerNum + ') ' + '' + games[2][i]
+											});
+									}
 
                 } else if (args[0] === "strike") { //3
-                    bot.sendMessage({
-                        to: channelID,
-                        message: user + ' is looking for ' + args[1] + ' more to do strikes'
-                    });
+									bot.sendMessage({
+											to: channelID,
+											message: 'Looking to do strikes (' + (games[3].length)/2 + '/3):'
+									});
+
+									for (j = 0; j < 25; j++){
+									}
+
+									for(i = 1; i < games[3].length; i+=2) {
+											playerNum = i;
+											bot.sendMessage({
+													to: channelID,
+													message: playerNum + ') ' + '' + games[3][i]
+											});
+									}
 
                 } else if (args[0] === "patrol") { //4
-                    bot.sendMessage({
-                        to: channelID,
-                        message: user + ' is looking for ' + args[1] + ' more to patrol'
-                    });
+									bot.sendMessage({
+											to: channelID,
+											message: 'Looking to patrol around (' + (games[4].length)/2 + '/3:'
+									});
+
+									for (j = 0; j < 25; j++){
+									}
+
+									for(i = 1; i < games[4].length; i+=2) {
+											playerNum = i;
+											bot.sendMessage({
+													to: channelID,
+													message: playerNum + ') ' + '' + games[4][i]
+											});
+									}
 
                 } else {
                     bot.sendMessage({
@@ -166,24 +259,118 @@ bot.on('message', function (user, userID, channelID, message, evt) {
      }
 });
 
-function remove(array, element) {
-    const index = array.indexOf(element);
-
-    if (index !== -1) {
-        array.splice(index, 1);
-    }
-}
+setInterval(function() {
+	if (games[0].length == 12){
+		bot.sendMessage({
+			to: lfgChannel,
+			message: 'The raid is full!'
+		});
+		for (i =0; i < games[0].length; i+=2){
+			bot.sendMessage({
+				to: lfgChannel,
+				message: '<@' + games[0][i] + '>'
+			});
+		}
+		bot.sendMessage({
+			to: lfgChannel,
+			message: 'please assemble in orbit!'
+		});
+		clearCnt = games[0].length
+		for (i = 0; i < clearCnt; i++){
+			games[0].splice(0, 1);
+		}
+	}
+}, 1000);
 
 setInterval(function() {
-    if (games[0].length == 4){
-    	bot.sendMessage({
+    if (games[1].length == 8){
+			bot.sendMessage({
+				to: lfgChannel,
+				message: 'The trials team is full!'
+			});
+			for (i =0; i < games[1].length; i+=2){
+				bot.sendMessage({
         	to: lfgChannel,
-        	message: 'The raid is full! ' + '<@' + games[0][0] + '>' + ', ' + '<@' + games[0][2] + '>' + ' please assemble in orbit!'
-    	});
-			clearCnt = games[0].length
+        	message: '<@' + games[1][i] + '>'
+    		});
+			}
+			bot.sendMessage({
+				to: lfgChannel,
+				message: 'please assemble in orbit!'
+			});
+			clearCnt = games[1].length
 			for (i = 0; i < clearCnt; i++){
-    		games[0].splice(0, 1);
+    		games[1].splice(0, 1);
 			}
     }
 
+}, 1000);
+
+setInterval(function() {
+	if (games[2].length == 8){
+		bot.sendMessage({
+			to: lfgChannel,
+			message: 'The crucible team is full!'
+		});
+		for (i =0; i < games[2].length; i+=2){
+			bot.sendMessage({
+				to: lfgChannel,
+				message: '<@' + games[2][i] + '>'
+			});
+		}
+		bot.sendMessage({
+			to: lfgChannel,
+			message: 'please assemble in orbit!'
+		});
+		clearCnt = games[2].length
+		for (i = 0; i < clearCnt; i++){
+			games[1].splice(0, 1);
+		}
+	}
+}, 1000);
+
+setInterval(function() {
+	if (games[3].length == 6){
+		bot.sendMessage({
+			to: lfgChannel,
+			message: 'The strike team is full!'
+		});
+		for (i =0; i < games[3].length; i+=2){
+			bot.sendMessage({
+				to: lfgChannel,
+				message: '<@' + games[3][i] + '>'
+			});
+		}
+		bot.sendMessage({
+			to: lfgChannel,
+			message: 'please assemble in orbit!'
+		});
+		clearCnt = games[3].length
+		for (i = 0; i < clearCnt; i++){
+			games[3].splice(0, 1);
+		}
+	}
+}, 1000);
+
+setInterval(function() {
+	if (games[4].length == 6){
+		bot.sendMessage({
+			to: lfgChannel,
+			message: 'The patrol team is full!'
+		});
+		for (i =0; i < games[4].length; i+=2){
+			bot.sendMessage({
+				to: lfgChannel,
+				message: '<@' + games[4][i] + '>'
+			});
+		}
+		bot.sendMessage({
+			to: lfgChannel,
+			message: 'please assemble in orbit!'
+		});
+		clearCnt = games[4].length
+		for (i = 0; i < clearCnt; i++){
+			games[4].splice(0, 1);
+		}
+	}
 }, 1000);
